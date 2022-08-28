@@ -1,0 +1,31 @@
+type Subscriber {
+    id: Int!
+    name: String!
+    avatar: String!
+    is_online: Int!
+    email: String!
+    hashed_password: String!
+}
+
+type SubscribersHaveRooms {
+    id: Int!
+    room_id: Int!
+    subscriber_id: Int!
+}
+
+input NewSubscriber {
+    name: String!
+    avatar: String
+    email: String!
+    password: String!
+}
+
+type SubscriberQuery {
+    online_subscribers: [Subscriber!]! @goField(forceResolver: true)
+    subscribers(query: String!): [Subscriber!]! @goField(forceResolver: true)
+}
+
+type SubscriberOps {
+    register(input: NewSubscriber!): String @goField(forceResolver: true)
+    login(email: String!, password: String!): String @goField(forceResolver: true)
+}

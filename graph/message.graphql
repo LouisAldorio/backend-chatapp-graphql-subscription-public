@@ -1,0 +1,23 @@
+type Message {
+  id: String!
+  subscriber_id: Int!
+  content: String!
+  created_at: String!
+  subscriber: Subscriber @goField(forceResolver: true)
+}
+
+type MessagePagination {
+  page: Int!
+  limit: Int!
+  room_id: Int!
+  total: Int! @goField(forceResolver: true)
+  nodes: [Message!]! @goField(forceResolver: true)
+}
+
+type MessageQuery {
+  messages(page: Int!, limit: Int!, room_id: Int!): MessagePagination! @goField(forceResolver: true)
+}
+
+type MessageOps {
+  post_message(content: String!,room_id: Int!): String! @goField(forceResolver: true)
+}

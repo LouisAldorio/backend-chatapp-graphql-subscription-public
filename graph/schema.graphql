@@ -1,0 +1,29 @@
+# GraphQL schema example
+#
+# https://gqlgen.com/getting-started/
+
+directive @goField(
+  forceResolver: Boolean
+  name: String
+) on INPUT_FIELD_DEFINITION | FIELD_DEFINITION
+
+directive @isValidLogin on FIELD_DEFINITION
+
+
+type Query {
+  message: MessageQuery! @isValidLogin
+  room: RoomQuery! @isValidLogin
+  subscriber: SubscriberQuery! @isValidLogin
+  invitation: InvitationQuery! @isValidLogin
+}
+
+type Mutation {
+  message: MessageOps! @isValidLogin
+  room: RoomOps! @isValidLogin
+  subscriber: SubscriberOps!
+  invitation: InvitationOps! @isValidLogin
+}
+
+type Subscription {
+  messages(room_id: Int!): [Message!]! @isValidLogin
+}

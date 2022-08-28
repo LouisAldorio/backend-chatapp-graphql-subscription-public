@@ -1,0 +1,19 @@
+type PendingInvitation {
+    id: Int!
+    inviter_id: Int!
+    receiver_id: Int!
+    room_id: Int!
+    inviter: Subscriber @goField(forceResolver: true)
+    receiver: Subscriber @goField(forceResolver: true)
+    room: Room @goField(forceResolver: true)
+}
+
+type InvitationQuery {
+    sent_invitation_request: [PendingInvitation!]! @goField(forceResolver: true)
+    received_invitation_request: [PendingInvitation!]! @goField(forceResolver: true)
+}
+
+type InvitationOps {
+    invite(room_id: Int!, receiver_id: Int!): PendingInvitation! @goField(forceResolver: true)
+    accept_invitation(invitation_id: Int!, room_id: Int!): Boolean! @goField(forceResolver: true) 
+}

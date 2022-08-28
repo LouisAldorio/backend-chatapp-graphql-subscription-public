@@ -1,0 +1,21 @@
+type Room {
+    id: Int!
+    name: String!
+    avatar: String!
+    subscribers: [Subscriber!]! @goField(forceResolver: true)
+}
+
+input NewRoom {
+    name: String!
+    avatar: String
+}
+
+type RoomQuery {
+    rooms_by_logged_in_user: [Room!]! @goField(forceResolver: true)
+    all_rooms_except_logged_in_user_rooms: [Room!]! @goField(forceResolver: true)
+}
+
+type RoomOps {
+    create(input: NewRoom!): Room! @goField(forceResolver: true)
+    add_new_subscriber_to_room(room_id: Int!): Room! @goField(forceResolver: true)
+}
